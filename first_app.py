@@ -12,6 +12,15 @@ import plotly.express as px
 import pandas as pd             
 
 
+## initilazing the app and adding bootstrap theme
+
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.COSMO],
+                meta_tags=[{'name': 'viewport',
+                            'content': 'width=device-width, initial-scale=1.0'}]
+                )
+server = app.server
+
 ## getting the data from NTG
 
 host="mysql-prod-db2-rds.csxffbq6aqlg.us-west-2.rds.amazonaws.com"
@@ -54,17 +63,6 @@ data_for_df = [record for record in result_data_1] ## list of tuples for creatin
 # creating df 
 col_names = desc_df.Field.unique().tolist()
 main_df = pd.DataFrame(data_for_df, columns =col_names)
-
-
-
-## initilazing the app and adding bootstrap theme
-
-
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.COSMO],
-                meta_tags=[{'name': 'viewport',
-                            'content': 'width=device-width, initial-scale=1.0'}]
-                )
-server = app.server
 
 
 ## creating the layout
